@@ -301,5 +301,10 @@ def select_random_dress():
     return jsonify({"selected_dress": selected_dress})
 
 
+@app.route('/hello', methods=['GET'])
+def get_it():
+    return jsonify("HELLO WORLD")
+
+
 if __name__ == '__main__':
     app.run(debug=True)  # You can customize host and port if needed
