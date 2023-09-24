@@ -307,4 +307,4 @@ def get_it():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)  # You can customize host and port if needed
+    app.run(host="0.0.0.0", port=5000)  # You can customize host and port if needed
