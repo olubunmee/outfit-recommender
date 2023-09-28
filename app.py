@@ -306,5 +306,5 @@ def get_it():
     return jsonify("HELLO WORLD")
 
 
-if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)  # You can customize host and port if needed
+# if __name__ == '__main__':
+#     app.run(host="0.0.0.0", port=5000)  # You can customize host and port if needed
