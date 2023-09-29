@@ -187,9 +187,17 @@ def display_matches():
 
     matching_pairs.clear()
 
+    random_top_indices = []
+
+    while len(random_top_indices) < 5:
+        random_index = random.randint(0, len(top_images) - 1)
+        if random_index not in random_top_indices:
+            random_top_indices.append(random_index)
+    random_top_images = [top_images[i] for i in random_top_indices]
+
     # Compare all pairs of cloth images to find the best match
-    for i in range(len(top_images)):
-        hist1 = calculate_color_histogram(top_images[i])
+    for i in range(len(random_top_images)):
+        hist1 = calculate_color_histogram(random_top_images[i])
         for j in range(len(below_torso_images)):
             hist2 = calculate_color_histogram(below_torso_images[j])
             feature_similarity = calculate_cosine_similarity(features_list1[i], features_list2[j])
@@ -202,14 +210,14 @@ def display_matches():
     matching_pairs.sort(key=lambda x: x[2], reverse=True)
 
     # Display the top matching pairs (adjust 'num_pairs_to_display' as needed)
-    num_pairs_to_display = len(top_images) * len(below_torso_images)
+    num_pairs_to_display = len(random_top_images) * len(below_torso_images)
     top_matches = []
     bottom_matches = []
     for i in range(num_pairs_to_display):
         if i == 5:
             break
         pair = matching_pairs[i]
-        top_matches.append(top_images[pair[0]])
+        top_matches.append(random_top_images[pair[0]])
         bottom_matches.append(below_torso_images[pair[1]])
     return top_matches, bottom_matches
 
