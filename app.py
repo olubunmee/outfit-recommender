@@ -315,7 +315,7 @@ def display_clothing_matches():
             return jsonify({"error": str(e)}), 500
 
 
-@app.route('/random_dress', methods=['GET'])
+@app.route('/random_dress', methods=['POST'])
 def select_random_dress():
     global dress_images
     data = request.get_json()
