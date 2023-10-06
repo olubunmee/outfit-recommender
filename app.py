@@ -187,13 +187,28 @@ def display_matches():
 
     matching_pairs.clear()
 
-    random_top_indices = []
+    # random_top_indices = []
+    #
+    # while len(random_top_indices) < 5:
+    #     random_index = random.randint(0, len(top_images) - 1)
+    #     if random_index not in random_top_indices:
+    #         random_top_indices.append(random_index)
 
+    random_top_indices = set()
+
+    # While the length of the set of random image indices is less than 5,
+    # generate a random index and add it to the set.
     while len(random_top_indices) < 5:
         random_index = random.randint(0, len(top_images) - 1)
-        if random_index not in random_top_indices:
-            random_top_indices.append(random_index)
-    random_top_images = [top_images[i] for i in random_top_indices]
+        random_top_indices.add(random_index)
+
+    # Create a new list to store the random images.
+    random_top_images = []
+
+    # Iterate over the set of random image indices and add the corresponding
+    # image from the `top_images` list to the `random_top_images` list.
+    for i in random_top_indices:
+        random_top_images.append(top_images[i])
 
     # Compare all pairs of cloth images to find the best match
     for i in range(len(random_top_images)):
@@ -302,6 +317,9 @@ def display_clothing_matches():
 
 @app.route('/random_dress', methods=['GET'])
 def select_random_dress():
+    global dress_images
+    data = request.get_json()
+    dress_images = data.get('dresses', [])
     if not dress_images:
         return jsonify({"message": "No dresses available"})
 
